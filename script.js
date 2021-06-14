@@ -10,8 +10,12 @@ let secretNumber = Math.trunc(Math.random() * 20) + 1;
 //document.querySelector(".number").textContent = secretNumber;
 
 // default score
-let score = 10;
+let score = 20;
 document.querySelector(".score").textContent = score;
+
+// higScore tracking
+let highScore = 0;
+document.querySelector(".highscore").textContent = highScore;
 
 // Again button functionality
 document.querySelector(".again").addEventListener("click", () => {
@@ -41,6 +45,12 @@ document.querySelector(".check").addEventListener("click", function () {
     document.querySelector(".score").textContent = score;
     document.querySelector(".number").textContent = secretNumber;
     // document.querySelector("body").style.backgroundColor = "#60b347";
+
+    if (score > highScore) {
+      highScore = score;
+      document.querySelector(".highscore").textContent = highScore;
+    }
+
     changeBackgroundColor("#60b347");
 
     // When guess is too High
