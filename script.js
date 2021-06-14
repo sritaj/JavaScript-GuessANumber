@@ -1,9 +1,10 @@
 "use strict";
 
 // generating random number for the ? field
-const number = Math.trunc(Math.random() * 20) + 1;
-document.querySelector(".number").textContent = number;
+const secretNumber = Math.trunc(Math.random() * 20) + 1;
+document.querySelector(".number").textContent = secretNumber;
 
+let score = 0;
 // logic to validate user Input
 document.querySelector(".check").addEventListener("click", function () {
   const enteredNumber = Number(document.querySelector(".guess").value);
@@ -11,14 +12,18 @@ document.querySelector(".check").addEventListener("click", function () {
 
   if (!enteredNumber) {
     document.querySelector(".message").textContent = "Please Enter a Number!!";
-  } else if (enteredNumber > 20) {
+  } else if (enteredNumber > secretNumber) {
     document.querySelector(".message").textContent = "Too High Input 📈";
-  } else if (enteredNumber < 1) {
+    score--;
+    document.querySelector(".score").textContent = score;
+  } else if (enteredNumber < secretNumber) {
     document.querySelector(".message").textContent = "Too Low Input 📉";
-  } else if (enteredNumber === number) {
-    document.querySelector(".number").textContent = number;
+    score--;
+    document.querySelector(".score").textContent = score;
+  } else if (enteredNumber === secretNumber) {
+    document.querySelector(".number").textContent = secretNumber;
     document.querySelector(".message").textContent = "Congratulations 🔥";
-  } else {
-    document.querySelector(".message").textContent = "Wrong Guess 🤭";
+    score++;
+    document.querySelector(".score").textContent = score;
   }
 });
